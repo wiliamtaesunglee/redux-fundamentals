@@ -12,12 +12,22 @@ const { createStore } = Redux
 const store = createStore(counter)
 
 store.subscribe(() => {
-    console.log('disparou uma ação!')
+    console.log('state:', store.getState())
+    $counter.textContent = store.getState()
 })
-console.log(createStore)
 
-store.dispatch({type: 'INCREMENT'})
-console.log(store.getState())
+const $counter = document.querySelector('[data-js="counter"]')
+const $increment = document.querySelector('[data-js="increment"')
+const $decrement = document.querySelector('[data-js="decrement"')
 
-store.dispatch({type: 'INCREMENT'})
-console.log(store.getState())
+$decrement.addEventListener('click', decrement, false)
+$increment.addEventListener('click', increment, false)
+
+function decrement() {
+    store.dispatch({type: 'DECREMENT'})
+}
+
+function increment() {
+    store.dispatch({type: 'INCREMENT'})
+}
+
